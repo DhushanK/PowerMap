@@ -7,14 +7,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.colors import PowerNorm 
+from tkinter import filedialog
 
 class Detector:
-    def __init__(self, videoPath, configPath, modelPath, classesPath):
-        self.heatmap_data = [[0 for _ in range(800)] for _ in range(600)]
+    def __init__(self, configPath, modelPath, classesPath):
+        self.heatmap_data = [[0 for _ in range(800)] for _ in range(600)] #Initializing a list to hold all the pixels on the heatmap
+
 
         # Create a button to view the heatmap
-        # ... (keep the existing initialization code)
-        self.videoPath = videoPath #Establishing an connection to the video 
+        self.videoPath = None #Establishing an connection to the video 
         self.configPath = configPath #Still establishing a connection but i lowk dont even know what a configuration file is in this context 
         self.modelPath = modelPath #Path to the trained model (from the internet) 
         self.classesPath = classesPath #Also a path but I lowk dont know what differentiates the classes it can access and cant 
@@ -27,17 +28,20 @@ class Detector:
         
         self.readClasses() #Sets up a line of code
         # Create Tkinter window and canvas
-        self.root = tk.Tk()
-        self.root.title("Object Tracking")
+        self.root = tk.Tk() #gui from python library to implement the heatmap code 
+        self.root.title("Object Tracking") #Setting up the heatmap 
         self.heatmap_button = tk.Button(self.root, text="View Heatmap", command=self.show_heatmap)
         self.heatmap_button.pack()
         self.canvas = tk.Canvas(self.root, width=800, height=600, bg="white")
         self.canvas.pack()
-
+        self.upload_button = tk.Button(self.root, text="Upload Video", command=self.select_video)
+        self.upload_button.pack()
+        self.process_button = tk.Button(self.root, text="Process Video", command=self.onVideo, state=tk.DISABLED)
+        self.process_button.pack()
         # Dictionary to store object IDs and their corresponding canvas items
         self.object_rectangles = {}
 
-    def update_heatmap(self, x, y):
+    def update_heatmap(self, x, y): #Increments heat map data if it is whtin the range of pxiels of a set radius of 10 
         radius = 10
         for i in range(max(0, y-radius), min(600, y+(radius+1))):
             for j in range(max(0, x-radius), min(800, x+(radius+1))):
@@ -52,6 +56,17 @@ class Detector:
         self.colorList  = np.random.uniform(low = 0, high = 255, size = (len(self.classesList), 3))
 
         print(self.classesList)
+    
+    def select_video(self):
+        filetypes = (("MP4 files", "*.mp4"), ("All files", "*.*"))
+        filename = filedialog.askopenfilename(title="Select a video file", filetypes=filetypes)
+        if filename:
+            self.videoPath = filename
+            print(f"Selected video: {filename}")
+            self.process_button.config(state=tk.NORMAL)
+
+    def run(self):
+        self.root.mainloop()
 
     def generate_heatmap(self):
         fig, ax = plt.subplots(figsize=(16, 12))
@@ -72,6 +87,9 @@ class Detector:
         canvas_widget.pack()
         
     def onVideo(self):
+        if not hasattr(self, 'videoPath') or not self.videoPath:
+            print("No video selected")
+            return
         cap = cv2.VideoCapture(self.videoPath)
         if not cap.isOpened():
             print("Error opening video file")
@@ -142,3 +160,5 @@ class Detector:
         self.root.mainloop()
 
 # ... (keep the rest of the code)
+
+

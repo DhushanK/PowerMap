@@ -1,1 +1,1 @@
-2.CAP_PROP_FRAME_HEIGHT)
+from Detector import *

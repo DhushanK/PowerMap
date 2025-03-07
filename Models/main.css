@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&family=Roboto:wght@100&display=swap');
+:root {
+    --font-major: "Roboto";
+    --custom-scrollbar-thumb-color: rgb(231, 214, 241);
+    --color-primary: blueviolet;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url('background.jpg');
+    background-size: cover;
+    font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+body {
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    font-family: var(--font-major);
+    font-weight: 100;
+    text-align: center;
+    align-items: center;
+    --color-primary: blueviolet;
+    font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.css-7g81c7{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url('background.jpg');
+    background-size: cover;
+    font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+#subheading{
+    font-weight: 100;
+    font-size: 30px;
+    width: 25%;
+    
+}
+
+#title{
+    
+    
+}
+
+.taipy-button {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1); /* White at 10% opacity */
+    border: 3px solid white; /* White border */
+    font-weight: bold; /* Bold outline */
+    padding: 15px 30px; /* Optional: adds some padding for better appearance */
+    border-radius: 5px; /* Optional: adds rounded corners */
+    cursor: pointer; 
+    margin-top:1vw;
+    font-size: 20px;
+    
+    
+  }
+
+  .taipy-button:hover {
+    border: 2px solid white; 
+    background-color: rgba(255, 255, 255, 0.2); /* Optional: changes background on hover for better UX */
+}
+
+#logo{
+    margin-top: 7vw;
+}
+
+.taipy-chart{
+    background-color: transparent;
+}
+
+
+
+
+
+

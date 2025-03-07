@@ -1,12 +1,14 @@
-from Detector import *
-import os 
-def main(): #Initializing all the variables in the constructor function in the following class 
-    videoPath = "testVideos/cartop.mp4"
-    configurationPath = os.path.join("Models","ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt")
-    modelPath = os.path.join("Models", "frozen_inference_graph.pb")
-    classesPath = os.path.join("Models", "coco.names")
+from taipy.gui import Gui
+from pages.results import results_md
+from pages.mapping import mapping_md
+from pages.table import table_md
+from pages.results import googlemaps_md
 
-    detector = Detector(videoPath, configurationPath , modelPath, classesPath)
-    detector.onVideo()      
+def main(): #Initializing all the variables in the constructor function in the following class 
+    
+    
+    pages = {"home":mapping_md, "data": table_md, "results":results_md, "/": "<center><|navbar|></center>", "map":googlemaps_md}
+    Gui(pages=pages).run()
+
 if __name__ == '__main__':
     main()
